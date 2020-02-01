@@ -10,14 +10,14 @@ export default class Touchables extends Component {
     this.state = {
       fontLoaded: false,
       text: 'hi',
-      tableHead: ['1', '1', '1', '1', '1'],
-      tableData: [
-        ['101', '1', '2', '3'], 
-        ['102', '1', '2', '3'],
-        ['103', '0', '0', '0'],
-        ['203', '1', '2', '3'],
-        ['202', '1', '2', '3'],
-        ['201', '1', '2', '3']]
+      nextLoading: [0, 0, 0],
+      deliverySchedule: 
+        [['101', 0, 0, 0], 
+        ['102', 0, 0, 0], 
+        ['103', 0, 0, 0], 
+        ['203', 0, 0, 0], 
+        ['202', 0, 0, 0], 
+        ['201', 0, 0, 0]]
     };
   }
 
@@ -35,18 +35,10 @@ export default class Touchables extends Component {
     this.ws.onmessage = (event) => {
       var parsedMessage = JSON.parse(event.data);
       console.log(parsedMessage);
-      // var stringShow = "";
-      // for (var key in parsedMessage) {
-      //   if (key == 'deliverySchedule') {
-      //     stringShow += "" + key + ": ";
-      //     for (var address in key) {
-      //       stringShow += "" +address + parsedMessage[key][address] + "\n";
-      //     }
-      //   }
-      //   stringShow += "" + key + ": " + parsedMessage[key] + "\n";
-      // }
-      // this._setText(stringShow);
-      this._setText(event.data);
+      this.setState((state, props) => {
+        return parsedMessage;
+      });
+      console.log(this.state);
     }
   }
 
@@ -74,7 +66,6 @@ export default class Touchables extends Component {
 
 
   render() {
-    const data = [1,2,3,4,5];
     return (
       <View style={styles.container}>
         <View style={styles.titleView}>
@@ -89,47 +80,47 @@ export default class Touchables extends Component {
         <Text style={styles.subtitle}>Next Loading</Text>
         <View style={styles.loadingTable}>
           <View style={styles.cell}><Text style={styles.blackCell}>STOP</Text></View>
-          <View style={styles.cell}><Text style={styles.redCell}>{this.state.tableHead[0]}</Text></View>
-          <View style={styles.cell}><Text style={styles.greenCell}>{this.state.tableHead[1]}</Text></View>
-          <View style={styles.cell}><Text style={styles.blueCell}>{this.state.tableHead[2]}</Text></View>
+          <View style={styles.cell}><Text style={styles.redCell}>{this.state.nextLoading[0]}</Text></View>
+          <View style={styles.cell}><Text style={styles.greenCell}>{this.state.nextLoading[1]}</Text></View>
+          <View style={styles.cell}><Text style={styles.blueCell}>{this.state.nextLoading[2]}</Text></View>
         </View>
         <Text style={styles.subtitle}>Delivery Schedule</Text>
         <View style={styles.ScheduleTable}>
           <View style={styles.childScheduleTable}>
-            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.tableData[0][0]}</Text></View>
-            <View style={styles.cell}><Text style={styles.redCell}>{this.state.tableData[0][1]}</Text></View>
-            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.tableData[0][2]}</Text></View>
-            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.tableData[0][3]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.deliverySchedule[0][0]}</Text></View>
+            <View style={styles.cell}><Text style={styles.redCell}>{this.state.deliverySchedule[0][1]}</Text></View>
+            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.deliverySchedule[0][2]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.deliverySchedule[0][3]}</Text></View>
           </View>
           <View style={styles.childScheduleTable}>
-            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.tableData[1][0]}</Text></View>
-            <View style={styles.cell}><Text style={styles.redCell}>{this.state.tableData[1][1]}</Text></View>
-            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.tableData[1][2]}</Text></View>
-            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.tableData[1][3]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.deliverySchedule[1][0]}</Text></View>
+            <View style={styles.cell}><Text style={styles.redCell}>{this.state.deliverySchedule[1][1]}</Text></View>
+            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.deliverySchedule[1][2]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.deliverySchedule[1][3]}</Text></View>
           </View>
           <View style={styles.childScheduleTable}>
-            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.tableData[2][0]}</Text></View>
-            <View style={styles.cell}><Text style={styles.redCell}>{this.state.tableData[2][1]}</Text></View>
-            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.tableData[2][2]}</Text></View>
-            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.tableData[2][3]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.deliverySchedule[2][0]}</Text></View>
+            <View style={styles.cell}><Text style={styles.redCell}>{this.state.deliverySchedule[2][1]}</Text></View>
+            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.deliverySchedule[2][2]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.deliverySchedule[2][3]}</Text></View>
           </View>
           <View style={styles.childScheduleTable}>
-            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.tableData[3][0]}</Text></View>
-            <View style={styles.cell}><Text style={styles.redCell}>{this.state.tableData[3][1]}</Text></View>
-            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.tableData[3][2]}</Text></View>
-            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.tableData[3][3]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.deliverySchedule[3][0]}</Text></View>
+            <View style={styles.cell}><Text style={styles.redCell}>{this.state.deliverySchedule[3][1]}</Text></View>
+            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.deliverySchedule[3][2]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.deliverySchedule[3][3]}</Text></View>
           </View>
           <View style={styles.childScheduleTable}>
-            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.tableData[4][0]}</Text></View>
-            <View style={styles.cell}><Text style={styles.redCell}>{this.state.tableData[4][1]}</Text></View>
-            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.tableData[4][2]}</Text></View>
-            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.tableData[4][3]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.deliverySchedule[4][0]}</Text></View>
+            <View style={styles.cell}><Text style={styles.redCell}>{this.state.deliverySchedule[4][1]}</Text></View>
+            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.deliverySchedule[4][2]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.deliverySchedule[4][3]}</Text></View>
           </View>
           <View style={styles.childScheduleTable}>
-            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.tableData[5][0]}</Text></View>
-            <View style={styles.cell}><Text style={styles.redCell}>{this.state.tableData[5][1]}</Text></View>
-            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.tableData[5][2]}</Text></View>
-            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.tableData[5][3]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blackCell}>{this.state.deliverySchedule[5][0]}</Text></View>
+            <View style={styles.cell}><Text style={styles.redCell}>{this.state.deliverySchedule[5][1]}</Text></View>
+            <View style={styles.cell}><Text style={styles.greenCell}>{this.state.deliverySchedule[5][2]}</Text></View>
+            <View style={styles.cell}><Text style={styles.blueCell}>{this.state.deliverySchedule[5][3]}</Text></View>
           </View>
         </View>
         <View style={styles.buttonView}>
