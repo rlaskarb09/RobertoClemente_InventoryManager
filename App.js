@@ -11,6 +11,8 @@ export default class Touchables extends Component {
       fontLoaded: false,
       text: 'hi',
       nextLoading: [0, 0, 0],
+      robotLocation: "",
+      robotMode: "",
       deliverySchedule: 
         [['101', 0, 0, 0], 
         ['102', 0, 0, 0], 
@@ -64,7 +66,6 @@ export default class Touchables extends Component {
       return {text: newText};
   });}
 
-
   render() {
     return (
       <View style={styles.container}>
@@ -76,6 +77,16 @@ export default class Touchables extends Component {
               <Text style={styles.titleBefore}>Roberto Clemente</Text>
             )
           }
+        </View>
+        <View style={styles.statusView}>
+          <View style={styles.childStatusView}>
+            <Text style={styles.statusLabel}>Location</Text>
+            <Text style={styles.statusText}>{this.state.robotLocation.toUpperCase()}</Text>
+          </View>
+          <View style={styles.childStatusView}>
+            <Text style={styles.statusLabel}>Mode</Text>
+            <Text style={styles.statusText}>{this.state.robotMode.toUpperCase()}</Text>
+          </View>
         </View>
         <Text style={styles.subtitle}>Next Loading</Text>
         <View style={styles.loadingTable}>
@@ -179,6 +190,26 @@ const styles = StyleSheet.create({
     fontFamily:'Pacifico',
     color: 'white'
   },
+  statusView: {
+    flex: 0.1,
+    marginTop: 5,
+    paddingHorizontal: 10,
+    flexDirection: 'row'
+  },
+  childStatusView: {
+    flex: 0.5,
+    flexDirection: 'row'
+  },
+  statusLabel: {
+    fontSize: 33,
+    flex: 0.5
+  },
+  statusText: {
+    fontSize: 33,
+    flex: 0.5,
+    color: 'blue',
+    textAlign: 'center'
+  },
   subtitle: {
     marginTop: 5,
     flex: 0.08,
@@ -186,7 +217,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonView: {
-    flex: 0.2,
+    flex: 0.15,
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
@@ -251,12 +282,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '75%',
     paddingHorizontal: 30,
-    flex: 0.12,
+    flex: 0.10,
     flexDirection:'row',
   },
   ScheduleTable:{
     alignSelf: 'center',
-    flex: 0.65,
+    flex: 0.54,
     width: '75%',
     flexDirection: 'column',
     alignItems: 'stretch',
