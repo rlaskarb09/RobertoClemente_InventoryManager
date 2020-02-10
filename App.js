@@ -57,6 +57,9 @@ export default class Touchables extends Component {
   onPressUnload = () => {
     this.ws.send('unload')
   }
+  onPressUnloadFail = () => {
+    this.ws.send('unloadFail')
+  }  
   onPressMaintenance = () => {
 
     this.ws.send('maintenance') 
@@ -203,6 +206,11 @@ export default class Touchables extends Component {
             </View>
           </TouchableHighlight></View>
           <View style={styles.childButtonView}><TouchableHighlight onPress={this.onPressOperating} underlayColor="white">
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Load Fail</Text>
+            </View>
+          </TouchableHighlight></View>
+          <View style={styles.childButtonView}><TouchableHighlight onPress={this.onPressUnloadFail} underlayColor="white">
             <View style={styles.button}>
               <Text style={styles.buttonText}>Unload Fail</Text>
             </View>
